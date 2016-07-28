@@ -1,0 +1,24 @@
+
+<head> <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<style>
+h1  : hover a{
+	color:red;
+}
+</style>
+</head>
+<div>
+    <h1><a href="/">My Blog</a></h1>
+</div>
+
+{% for post in posts %}
+    <div>
+
+        <h1><a href="posts/{{ post.id }}">{{ post.title }}</a></h1>
+        <p>published: {{ post.published_date }}</p>
+
+        <p>{{ post.text }}</p>
+    	
+
+    </div>
+{% endfor %}

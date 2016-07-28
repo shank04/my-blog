@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
 
+class EntryQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(publish=True)
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
@@ -9,11 +12,12 @@ class Post(models.Model):
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(
-            blank=True, null=True)
+             null=True)
+    is_liked=models.BooleanField(default=False)
 
     def publish(self):
         self.published_date = timezone.now()
         self.save()
 
     def __str__(self):
-        return self.title
+        return self.text

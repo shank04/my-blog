@@ -1,7 +1,6 @@
-
-
 <head> <!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"-->
+
 <style>
 *{
 	margin: 0px;
@@ -27,25 +26,24 @@
 		padding-top: 20px;
 
 	}
-	#head1{
-		margin: auto;
-	}
 	#post{
 		width: 500px;
 		margin: 5px auto;
 		background-color: #66CCCC;
 		padding: 20px;
-
-	}
-	a:hover{
-		color: red;
 	}
 	p{
 		font-size: 20px;
 	}
-	img{
-		display: inline-block;
-		float: right;
+	#form{
+		margin: 5px auto;
+		text-align: center;
+	}
+	#button{
+		width: 80px;
+		height:30px;
+		padding: 2px;
+		font-weight: bold;
 	}
 </style>
 </head>
@@ -54,19 +52,23 @@
     <h1 id="head">My Blog</h1>
 </div>
 
-{% for post in posts %}
-    <div id="post">
-    <div id="head1">
-        <h1><a href="{% url 'detail' post.id %}">{{ post.title }}</a></h1>
-        {% if post.is_liked %}
-        	<img src="http://findicons.com/files/icons/329/simple/128/favorites.png" width="20px" height="15px"></img>
-        {% endif %}
-        <br><br>
-        <p><strong>Published : </strong>{{ post.published_date }}</p>
-        
-        <!--p>{{ post.text }}</p-->
-    	
-        </div>
-    </div>
-{% endfor %}
+<!--p>Details for blog no. {{ try2 }}</p-->
+<div id="post">
+<h1>{{ posts.title }}
+</h1><br>
+<p>{{posts.text}}</p>
+</div><br><br>
+<div id="form">
+<form action="{% url 'like' try2 %}" method="post">
+{% csrf_token %}
+	{% if posts.is_liked %}
+		<strong>Wanna dislike ? </strong> <input type="submit" value="UnLike" id="button"></input>
+		
+	{% else %}
+		<strong>Liked it? Hit Like  </strong> <input type="submit" value="Like" id="button"></input>
+	{% endif %}
+	
+
+</form>
+</div>
 </body>
