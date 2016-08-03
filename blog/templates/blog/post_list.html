@@ -11,24 +11,20 @@
 	font-family: Arial;
 
 }
+body{
+	background-color: #A5BAD1;
+}
 	#blog{
 		background-color: lightgrey;
 		
-		height:100px;
+		height:60px;
 		
-		
-		text-align: center;
-		
-
-	}
-	#head{
-
-		margin: auto;
 		padding-top: 20px;
-
+		font-family: cursive;
 	}
 	#head1{
-		margin: auto;
+		
+		padding-left: 30px;
 	}
 	#post{
 		width: 500px;
@@ -39,6 +35,7 @@
 	}
 	a:hover{
 		color: red;
+		text-decoration: underline;
 	}
 	p{
 		font-size: 20px;
@@ -47,11 +44,29 @@
 		display: inline-block;
 		float: right;
 	}
+	ul li{
+		display: inline-block;
+	}
+	#l2{
+		padding-left: 950px;
+		padding-right: 10px;
+	}
 </style>
 </head>
 <body>
 <div id="blog">
-    <h1 id="head">My Blog</h1>
+	<ul>
+    <li><h1><a href="{% url 'post_list' %}" id="head1">Blog</a></h1></li>
+    {% if user.is_authenticated %}
+
+    	<li id="l2"><h3>Hello {{request.user.username}}!</h3></li>
+    	<li><h3><a href="{% url 'logout' %}">Sign out</a></h3></li>
+	{% else %}
+    	<li id="l2"><h3><a href="{% url 'register' %}">Sign up</a></h3></li>
+    	<li><h3><a href="{% url 'login' %}">Sign in</a></h3></li>
+    {% endif %}
+
+    </ul>
 </div>
 
 {% for post in posts %}

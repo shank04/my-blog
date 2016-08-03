@@ -13,19 +13,12 @@
 	#blog{
 		background-color: lightgrey;
 		
-		height:100px;
+		height:60px;
 		
-		
-		text-align: center;
-		
-
-	}
-	#head{
-
-		margin: auto;
 		padding-top: 20px;
-
-	}
+		font-family: cursive;
+	}	
+	
 	#post{
 		width: 500px;
 		margin: 5px auto;
@@ -45,12 +38,37 @@
 		padding: 2px;
 		font-weight: bold;
 	}
+	ul li{
+		display: inline-block;
+	}
+	#l2{
+		padding-left: 950px;
+		padding-right: 10px;
+	}
+	a:hover{
+		color: red;
+		text-decoration: underline;
+	}
+	#head1{
+		
+		padding-left: 30px;
+	}
 </style>
 </head>
 <body>
 <div id="blog">
-    <h1 id="head">My Blog</h1>
-</div>
+	<ul>
+    <li><h1><a href="{% url 'post_list' %}" id="head1">Blog</a></h1></li>
+    {% if user.is_authenticated %}
+
+    	<li id="l2"><h3>Hello {{request.user.username}}!</h3></li>
+    	<li><h3><a href="{% url 'logout' %}">Sign out</a></h3></li>
+	{% else %}
+    	<li id="l2"><h3><a href="{% url 'register' %}">Sign up</a></h3></li>
+    	<li><h3><a href="{% url 'login' %}">Sign in</a></h3></li>
+    {% endif %}
+
+    </ul></div>
 
 <!--p>Details for blog no. {{ try2 }}</p-->
 <div id="post">

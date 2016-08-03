@@ -1,9 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-class EntryQuerySet(models.QuerySet):
-    def published(self):
-        return self.filter(publish=True)
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
