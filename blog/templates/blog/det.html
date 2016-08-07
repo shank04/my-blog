@@ -53,12 +53,29 @@
 		
 		padding-left: 30px;
 	}
+	img{
+		display: inline-block;
+		float: right;
+		width: 30px;
+		height: 25px;
+		border:1px solid black;
+		background-color: lightgrey;
+		border-radius: 5px;
+		opacity: 0.6;
+	}
+	img:hover{
+		opacity: 1;
+	}
+	body{
+	background-color: #A5BAD1;
+}
+
 </style>
 </head>
 <body>
 <div id="blog">
 	<ul>
-    <li><h1><a href="{% url 'post_list' %}" id="head1">Blog</a></h1></li>
+    <li><h1><a href="{% url 'post_list' %}" id="head1" title="Back to home">Blog</a></h1></li>
     {% if user.is_authenticated %}
 
     	<li id="l2"><h3>Hello {{request.user.username}}!</h3></li>
@@ -72,20 +89,32 @@
 
 <!--p>Details for blog no. {{ try2 }}</p-->
 <div id="post">
+<a href="{% url 'edit' try2 %}"><img src="https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_mode_edit_48px-128.png" title="Edit"/></a>
+
 <h1>{{ posts.title }}
-</h1><br>
+</h1>
+<br>
+
 <p>{{posts.text}}</p>
 </div><br><br>
 <div id="form">
 <form action="{% url 'like' try2 %}" method="post">
 {% csrf_token %}
 	{% if posts.is_liked %}
-		<strong>Wanna dislike ? </strong> <input type="submit" value="UnLike" id="button"></input>
+		<strong>Don't like it anymore ? No issues</strong> <input type="submit" value="UnLike" id="button"></input>
 		
 	{% else %}
-		<strong>Liked it? Hit Like  </strong> <input type="submit" value="Like" id="button"></input>
+		<strong>Liked it ? Hit Like  </strong> <input type="submit" value="Like" id="button"></input>
 	{% endif %}
 	
+	
+	{% if posts.objects.filter(author=user.username) %}
+	 <script> alert("equal"); </script>
+	{% endif %}
+
+
+
+
 
 </form>
 </div>

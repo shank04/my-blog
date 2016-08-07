@@ -1,10 +1,9 @@
 <style>
-body{
-	text-align: center;
-	background-color: #A5BAD1;
-
+*{
+	text-decoration: none;
+	
 }
-#form{
+	#form{
 	border:3px solid black;
 	width:500px;
 	margin: auto;
@@ -12,22 +11,27 @@ body{
 	padding: 10px
 
 }
+body{
+	text-align: center;
+	background-color: #A5BAD1;
+
+}
+#error{
+	color: red;
+}
 </style>
 <body>
-<h1>Registration form</h1>
 <div id="form">
-<form action="" method="post" autocomplete="OFF">
+<form action="" method="post">
 	{% csrf_token %}
-	
-	Username: &nbsp&nbsp&nbsp&nbsp{{form.username}}<br>
-	<br>
-	Email: &nbsp&nbsp&nbsp&nbsp{{form.email}}<br>
-	<br>
-	Password: &nbsp&nbsp&nbsp&nbsp{{form.password}}<br>
-	
-	 <br>
-	 <button type="Submit" value="submit">Register</button>
-	 
+{% for field in form %}
+<div id="error">
+<p>{{field.errors}}</p>
+</div>
+<label>{{field.label_tag}}</label>
+{{field}}<br><br>
+{% endfor %}
+<button type="submit" value="submit">Submit</button>
 </form>
 </div>
 </body>

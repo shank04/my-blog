@@ -8,6 +8,9 @@ from .forms import UserForm
 from .forms import LoginForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 
 def post_list(request):
     posts = Post.objects.all
@@ -93,6 +96,13 @@ def user_logout(request):
 
     return redirect('post_list')
 
-    
+class postblog(CreateView):
+	model=Post
+	fields=['author','title','text','created_date','published_date']
+
+class editblog(UpdateView):
+	model=Post
+	fields=['author','title','text','created_date','published_date'] 
+	success_url=reverse_lazy('post_list')  
     
 

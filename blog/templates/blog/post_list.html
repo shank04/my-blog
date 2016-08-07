@@ -40,9 +40,11 @@ body{
 	p{
 		font-size: 20px;
 	}
-	img{
+	#star{
 		display: inline-block;
 		float: right;
+		width: 20px;
+		height: 15px;
 	}
 	ul li{
 		display: inline-block;
@@ -51,16 +53,51 @@ body{
 		padding-left: 950px;
 		padding-right: 10px;
 	}
+	#more{
+		height:60px;
+		background-color: #AD8BCC;
+		text-align: center;
+	}
+	#para{
+		padding-top:15px; 
+		color: blue;
+	}
+	p a{
+		color: blue;
+		text-decoration: underline;
+	}
+	#footer{
+		height:60px;
+		background-color: lightgrey;
+		text-align: center;
+		padding-top:30px; 
+
+	}
+	#footer h4{
+		color: magenta;
+
+	}
+	#icon{
+		width: 35px;
+		height: 25px;
+		
+		border:2px solid grey;
+		border-radius: 5px;
+	}
+	#icon:hover{
+		
+	}
 </style>
 </head>
 <body>
 <div id="blog">
 	<ul>
-    <li><h1><a href="{% url 'post_list' %}" id="head1">Blog</a></h1></li>
+    <li><h1><a href="{% url 'post_list' %}" id="head1" title="Home">Blog</a></h1></li>
     {% if user.is_authenticated %}
 
     	<li id="l2"><h3>Hello {{request.user.username}}!</h3></li>
     	<li><h3><a href="{% url 'logout' %}">Sign out</a></h3></li>
+
 	{% else %}
     	<li id="l2"><h3><a href="{% url 'register' %}">Sign up</a></h3></li>
     	<li><h3><a href="{% url 'login' %}">Sign in</a></h3></li>
@@ -74,7 +111,7 @@ body{
     <div id="head1">
         <h1><a href="{% url 'detail' post.id %}">{{ post.title }}</a></h1>
         {% if post.is_liked %}
-        	<img src="http://findicons.com/files/icons/329/simple/128/favorites.png" width="20px" height="15px"></img>
+        	<img src="http://findicons.com/files/icons/329/simple/128/favorites.png" id="star" ></img>
         {% endif %}
         <br><br>
         <p><strong>Published : </strong>{{ post.published_date }}</p>
@@ -84,4 +121,14 @@ body{
         </div>
     </div>
 {% endfor %}
+        <br><br>
+        <br><br>
+        <br><br>
+<div id="more">
+<p id="para">Post your own blog for others to see it..&nbsp;<a href="{% url 'postblog' %}"><img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/edit_property.png" id="icon" title="Write Blog"/>  </a></p>
+</div>
+        
+<div id="footer">
+<h4>&copy;&nbsp;Made by Shank with &hearts;<h4>
+</div>
 </body>
